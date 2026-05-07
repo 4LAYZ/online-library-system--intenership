@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services Page</title>
+
+<style>
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* BODY */
+body{
+    font-family: Arial, sans-serif;
+
+    /* 📚 Background image */
+    background: url('https://images.unsplash.com/photo-1512820790803-83ca734da794')
+    no-repeat center center/cover;
+
+    min-height:100vh;
+}
+
+/* DARK OVERLAY */
+.overlay{
+    background: rgba(0,0,0,0.6);
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+}
+
+/* MAIN CONTAINER */
+.container{
+    background: rgba(255,255,255,0.95);
+    padding:40px;
+    width:100%;
+    max-width:700px;
+
+    border-radius:12px;
+
+    box-shadow:0 4px 20px rgba(0,0,0,0.3);
+
+    position:relative;
+}
+
+/* BACK BUTTON */
+.back-btn{
+    position:absolute;
+    top:15px;
+    left:15px;
+
+    background:#222;
+    color:white;
+
+    border:none;
+    padding:10px 16px;
+
+    border-radius:6px;
+    cursor:pointer;
+
+    font-size:14px;
+
+    transition:0.3s;
+}
+
+.back-btn:hover{
+    background:#000;
+}
+
+/* TITLE */
+.title{
+    text-align:center;
+    text-decoration:underline;
+    letter-spacing:2px;
+
+    font-size:28px;
+    font-weight:bold;
+
+    margin-bottom:30px;
+
+    color:#222;
+}
+
+/* HEADING */
+h2{
+    margin-bottom:20px;
+    color:#333;
+}
+
+/* LIST */
+ul{
+    list-style:none;
+    padding:0;
+}
+
+/* LIST ITEMS */
+li{
+    margin:15px 0;
+    font-size:17px;
+    color:#444;
+
+    background:#f4f4f4;
+    padding:14px;
+
+    border-radius:8px;
+
+    transition:0.3s;
+}
+
+/* HOVER EFFECT */
+li:hover{
+    background:#e8e8e8;
+    transform:translateX(5px);
+}
+
+/* BULLET */
+li::before{
+    content:"✔ ";
+    color:green;
+    font-weight:bold;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+
+    .container{
+        width:100%;
+        padding:30px 20px;
+    }
+
+    .title{
+        font-size:22px;
+    }
+
+    li{
+        font-size:15px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="overlay">
+
+    <div class="container">
+
+        <!-- BACK BUTTON -->
+        <button class="back-btn" onclick="goBack()">← Back</button>
+
+        <!-- PAGE TITLE -->
+        <div class="title">SERVICES PAGE</div>
+
+        <!-- SERVICES -->
+        <h2>OUR SERVICES</h2>
+
+        <ul>
+            <li>Online Reading → Read books anytime and anywhere</li>
+
+            <li>Book Downloads → Download books for offline reading</li>
+
+            <li>Smart Search → Easily find books by title, author, or topic</li>
+
+            <li>Borrow & Return → Borrow and return books online easily</li>
+
+            <li>Favorites → Save your favorite books for quick access</li>
+
+            <li>User Account → Manage your profile and reading history</li>
+        </ul>
+
+    </div>
+
+</div>
+
+<script>
+
+/* BACK BUTTON FUNCTION */
+function goBack(){
+    window.history.back();
+}
+
+</script>
+
+</body>
+</html>

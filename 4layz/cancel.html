@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Register Form</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: hsl(0, 13%, 95%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        background: #ddd;
+        padding: 40px 30px;
+        border-radius: 10px;
+        width: 350px;
+        text-align: center;
+    }
+
+    h2 {
+        margin-bottom: 25px;
+        font-weight: normal;
+        letter-spacing: 1px;
+    }
+
+    .input-box {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .input-box input,
+    .input-box select {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        background: #111;
+        color: #fff;
+        font-size: 14px;
+        outline: none;
+    }
+
+    .input-box input::placeholder {
+        color: #ccc;
+        text-transform: uppercase;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    button {
+        width: 45%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        background: linear-gradient(45deg, #3a00ff, #5f00ff);
+    }
+
+    button:hover {
+        opacity: 0.9;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>REGISTER</h2>
+
+    <div class="input-box">
+        <input type="text" placeholder="SDMS">
+    </div>
+
+    <div class="input-box">
+        <input type="text" placeholder="FIRST NAME">
+    </div>
+
+    <div class="input-box">
+        <input type="text" placeholder="LAST NAME">
+    </div>
+
+    <div class="input-box">
+        <input type="email" placeholder="EMAIL">
+    </div>
+
+    <div class="input-box">
+        <select>
+            <option disabled selected>GENDER</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+    </div>
+
+    <div class="input-box">
+        <input type="date">
+    </div>
+
+    <div class="input-box">
+        <input type="password" placeholder="PASSWORD">
+    </div>
+
+    <div class="buttons">
+        <BUtton><a href="cancel.html">cancel</a></BUtton>
+        <BUtton><a href="send.html">send</a></BUtton>
+    </div>
+</div>
+
+</body>
+</html>

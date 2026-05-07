@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Library Management System</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #111;
+    color: white;
+}
+
+/* LOGIN */
+.login-box {
+    width: 300px;
+    margin: 100px auto;
+    background: #222;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 200px;
+    background: #1a1a1a;
+    height: 100vh;
+    padding: 20px;
+    position: fixed;
+    display: none;
+}
+
+.sidebar button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* MAIN */
+.main {
+    margin-left: 220px;
+    padding: 20px;
+    display: none;
+}
+
+/* CARDS */
+.cards {
+    display: flex;
+    gap: 10px;
+}
+
+.card {
+    flex: 1;
+    background: #222;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #444;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background: #333;
+}
+
+input, select {
+    padding: 10px;
+    margin: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div class="login-box" id="loginBox">
+    <h2>Admin Login</h2>
+    <input type="email" id="email" placeholder="Email"><br>
+    <input type="password" id="password" placeholder="Password"><br>
+    <button onclick="login()">Login</button>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+    <h2>Library</h2>
+    <button>Dashboard</button>
+    <button>Students</button>
+    <button>Books</button>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<!-- MAIN -->
+<div class="main" id="main">
+
+    <h1>Dashboard</h1>
+
+    <div class="cards">
+        <div class="card">
+            <h3 id="totalStudents"></h3>
+            <p>Total Students</p>
+        </div>
+        <div class="card">
+            <h3 id="borrowed"></h3>
+            <p>Borrowed Books</p>
+        </div>
+        <div class="card">
+            <h3 id="online"></h3>
+            <p>Online Users</p>
+        </div>
+    </div>
+
+    <h3>Add Student</h3>
+    <input type="text" id="name" placeholder="Student Name">
+    <input type="text" id="book" placeholder="Book Name">
+    <select id="type">
+        <option value="Borrowing">Borrowing</option>
+        <option value="Buying">Buying</option>
+    </select>
+    <button onclick="addStudent()">Add</button>
+
+    <br>
+
+    <input type="text" id="search" placeholder="Search..." onkeyup="searchData()">
+
+    <table>
+        <tr>
+            <th>Student</th>
+            <th>Book</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Download</th>
+        </tr>
+        <tbody id="tableData"></tbody>
+    </table>
+
+</div>
+
+<script>
+// LOGIN DATA (demo)
+const adminEmail = "admin@gmail.com";
+const adminPass = "12345";
+
+// DATA
+let students = [
+    {name:"Eric", book:"Math", type:"Borrowing", online:true},
+    {name:"Alice", book:"Physics", type:"Buying", online:false},
+    {name:"John", book:"History", type:"Borrowing", online:true},
+    {name:"Diane", book:"English", type:"Buying", online:true}
+];
+
+// LOGIN
+function login(){
+    let email = document.getElementById("email").value;
+    let pass = document.getElementById("password").value;
+
+    if(email === adminEmail && pass === adminPass){
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("sidebar").style.display = "block";
+        document.getElementById("main").style.display = "block";
+        loadData();
+    } else {
+        alert("Wrong email or password!");
+    }
+}
+
+// LOAD DATA
+function loadData(filter=""){
+    let table = document.getElementById("tableData");
+    table.innerHTML = "";
+
+    let filtered = students.filter(s =>
+        s.name.toLowerCase().includes(filter.toLowerCase()) ||
+        s.book.toLowerCase().includes(filter.toLowerCase())
+    );
+
+    let borrowed = 0;
+    let online = 0;
+
+    filtered.forEach(s => {
+        if(s.type === "Borrowing") borrowed++;
+        if(s.online) online++;
+
+        let status = s.online ? "🟢 Online" : "🔴 Offline";
+
+        table.innerHTML += `
+        <tr>
+            <td>${s.name}</td>
+            <td>${s.book}</td>
+            <td>${s.type}</td>
+            <td>${status}</td>
+            <td><button onclick="downloadBook('${s.book}')">⬇️</button></td>
+        </tr>`;
+    });
+
+    document.getElementById("totalStudents").innerText = students.length;
+    document.getElementById("borrowed").innerText = borrowed;
+    document.getElementById("online").innerText = online;
+}
+
+// ADD STUDENT
+function addStudent(){
+    let name = document.getElementById("name").value;
+    let book = document.getElementById("book").value;
+    let type = document.getElementById("type").value;
+
+    if(name === "" || book === ""){
+        alert("Fill all fields!");
+        return;
+    }
+
+    students.push({
+        name:name,
+        book:book,
+        type:type,
+        online:true
+    });
+
+    loadData();
+
+    document.getElementById("name").value = "";
+    document.getElementById("book").value = "";
+}
+
+// SEARCH
+function searchData(){
+    let val = document.getElementById("search").value;
+    loadData(val);
+}
+
+// DOWNLOAD DEMO
+function downloadBook(book){
+    let blob = new Blob(["Downloaded: " + book], {type:"text/plain"});
+    let link = document.createElement("a");
+
+    link.href = URL.createObjectURL(blob);
+    link.download = book + ".txt";
+    link.click();
+}
+
+// LOGOUT
+function logout(){
+    location.reload();
+}
+</script>
+<footer style="
+    background:#1a1a1a;
+    color:white;
+    text-align:center;
+    padding:15px;
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    border-top:1px solid #333;
+    font-size:14px;
+">
+    <div><strong>Platform:</strong> Online Library Management System</div>
+    <div><strong>Address:</strong> Kigali, Rwanda</div>
+    <div style="margin-top:5px; color:#aaa;">
+        © 2026 All Rights Reserved
+    </div>
+</footer>
+</body>
+</html>

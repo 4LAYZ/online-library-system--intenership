@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Library Dashboard</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+}
+
+/* Navbar */
+nav {
+    background: #333;
+    padding: 15px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    margin: 0 20px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+nav a:hover {
+    color: yellow;
+}
+
+/* Title */
+h1 {
+    text-align: center;
+    color: white;
+}
+
+/* Container */
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+/* Cards */
+.card {
+    background: #ddd;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #333;
+    color: white;
+}
+
+td, th {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #aaa;
+}
+
+/* Hide sections */
+.section {
+    display: none;
+}
+
+/* Show active */
+.active {
+    display: block;
+}
+</style>
+
+</head>
+<body>
+
+<!-- 🔗 Navbar -->
+<nav>
+    <a onclick="showSection('borrowed')">Borrowed</a>
+    <a onclick="showSection('returned')">Returned</a>
+    <a onclick="showSection('downloaded')">Downloaded</a>
+    <a onclick="showSection('overdue')">Overdue</a>
+</nav>
+
+<div class="container">
+
+<h1>📊 Library Management Dashboard</h1>
+
+<!-- 📚 Borrowed (DEFAULT) -->
+<div id="borrowed" class="section active">
+<div class="card">
+<h2>📚 Borrowed Books</h2>
+<table>
+<tr><th>Book</th><th>User</th><th>Date</th></tr>
+<tr><td>Java</td><td>John</td><td>2026-05-01</td></tr>
+</table>
+</div>
+</div>
+
+<!-- ✅ Returned -->
+<div id="returned" class="section">
+<div class="card">
+<h2>✅ Returned Books</h2>
+<table>
+<tr><th>Book</th><th>User</th><th>Date</th></tr>
+<tr><td>HTML</td><td>Alice</td><td>2026-05-03</td></tr>
+</table>
+</div>
+</div>
+
+<!-- ⬇ Downloaded -->
+<div id="downloaded" class="section">
+<div class="card">
+<h2>⬇ Downloaded Books</h2>
+<table>
+<tr><th>Book</th><th>User</th><th>Date</th></tr>
+<tr><td>CSS</td><td>Mike</td><td>2026-05-02</td></tr>
+</table>
+</div>
+</div>
+
+<!-- ⚠ Overdue -->
+<div id="overdue" class="section">
+<div class="card">
+<h2>⚠ Overdue Books</h2>
+<table>
+<tr><th>Book</th><th>User</th><th>Status</th></tr>
+<tr><td>Python</td><td>David</td><td>Not Returned</td></tr>
+</table>
+</div>
+</div>
+
+</div>
+
+<!-- 🔥 JavaScript -->
+<script>
+function showSection(sectionId) {
+    var sections = document.querySelectorAll('.section');
+
+    sections.forEach(function(section) {
+        section.classList.remove('active');
+    });
+
+    document.getElementById(sectionId).classList.add('active');
+}
+</script>
+
+</body>
+</html>

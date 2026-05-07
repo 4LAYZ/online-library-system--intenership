@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Library System</title>
+
+<style>
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+    color:#333;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    background:linear-gradient(to right, #1e5f86, #2f86c1);
+
+    padding:15px 40px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    position:sticky;
+    top:0;
+
+    z-index:1000;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+    color:white;
+}
+
+/* NAV LINKS */
+.nav-links{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    margin:8px 12px;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    color:#ffe082;
+}
+
+/* SEARCH + LOGOUT */
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.nav-right input{
+    padding:8px 12px;
+    border:none;
+    border-radius:5px;
+    outline:none;
+}
+
+/* LOGOUT BUTTON */
+.logout-btn{
+    background:#e74c3c;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:5px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.logout-btn:hover{
+    background:#c0392b;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    height:550px;
+
+    background:url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f')
+    no-repeat center center/cover;
+
+    position:relative;
+
+    display:flex;
+    align-items:center;
+}
+
+/* HERO OVERLAY */
+.hero-overlay{
+    position:absolute;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,0.6);
+}
+
+/* HERO CONTENT */
+.hero-content{
+    position:relative;
+    z-index:2;
+
+    color:white;
+
+    padding:0 60px;
+
+    max-width:700px;
+}
+
+.hero-content p{
+    font-style:italic;
+    margin-bottom:10px;
+    color:#ddd;
+}
+
+.hero-content h1{
+    font-size:42px;
+    margin-bottom:20px;
+    line-height:1.4;
+}
+
+/* HERO BUTTONS */
+.hero-buttons button{
+    padding:12px 18px;
+    margin-right:10px;
+
+    border:none;
+    border-radius:5px;
+
+    cursor:pointer;
+    font-size:15px;
+
+    transition:0.3s;
+}
+
+.features-btn{
+    background:#3498db;
+    color:white;
+}
+
+.features-btn:hover{
+    background:#2980b9;
+}
+
+.create-btn{
+    background:#2ecc71;
+    color:white;
+}
+
+.create-btn:hover{
+    background:#27ae60;
+}
+
+/* ================= BOOK SECTION ================= */
+
+.section-title{
+    text-align:center;
+    padding:40px 0 20px;
+    font-size:32px;
+    color:#222;
+}
+
+/* GRID */
+.container{
+    width:90%;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+
+    gap:25px;
+
+    padding-bottom:50px;
+}
+
+/* CARD */
+.card{
+    background:white;
+
+    border-radius:12px;
+    overflow:hidden;
+
+    position:relative;
+
+    transition:0.4s ease;
+
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 15px 25px rgba(0,0,0,0.2);
+}
+
+/* IMAGE */
+.card img{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+}
+
+/* CARD CONTENT */
+.card-content{
+    padding:15px;
+    text-align:center;
+}
+
+.card-content h3{
+    margin-bottom:12px;
+}
+
+/* BUTTONS */
+.buttons button{
+    border:none;
+    padding:9px 14px;
+    margin:5px;
+
+    border-radius:5px;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.read{
+    background:#3498db;
+    color:white;
+}
+
+.buy{
+    background:#2ecc71;
+    color:white;
+}
+
+.buttons button:hover{
+    opacity:0.8;
+}
+
+/* OVERLAY */
+.book-overlay{
+    position:absolute;
+
+    bottom:0;
+    left:0;
+    right:0;
+
+    background:rgba(0,0,0,0.75);
+    color:white;
+
+    height:0;
+    overflow:hidden;
+
+    transition:0.4s ease;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+    padding:15px;
+}
+
+.card:hover .book-overlay{
+    height:70%;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#111;
+    color:white;
+
+    padding:40px 20px;
+}
+
+.footer-container{
+    display:flex;
+    justify-content:space-between;
+
+    flex-wrap:wrap;
+
+    gap:30px;
+}
+
+.footer-box{
+    flex:1;
+    min-width:220px;
+}
+
+.footer-box h3{
+    margin-bottom:15px;
+    color:#00bfff;
+}
+
+.footer-box p,
+.footer-box a{
+    color:#ddd;
+    text-decoration:none;
+    line-height:30px;
+}
+
+.footer-box a:hover{
+    color:#00bfff;
+}
+
+.social-links a{
+    display:block;
+}
+
+.footer-bottom{
+    text-align:center;
+
+    margin-top:30px;
+    border-top:1px solid #444;
+
+    padding-top:15px;
+
+    color:#aaa;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:768px){
+
+    .navbar{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .hero-content{
+        padding:20px;
+    }
+
+    .hero-content h1{
+        font-size:30px;
+    }
+
+    .container{
+        width:95%;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<div class="navbar">
+
+    <div class="logo">📚 Online Library</div>
+
+    <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="register.html">Register</a>
+        <a href="service.html">Services</a>
+        <a href="login.html">Login</a>
+        <a href="admin.html">Admin</a>
+    </div>
+
+    <div class="nav-right">
+
+        <input type="search" id="search" placeholder="Search books...">
+
+        <button class="logout-btn" onclick="logoutUser()">
+            Logout
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+
+        <p>The Integrated Library System (ILS)</p>
+
+        <h1>
+            OPEN A FREE LIBRARY <br>
+            START MANAGING YOUR BOOKS
+        </h1>
+
+        <div class="hero-buttons">
+
+            <button class="features-btn">
+                View All Features
+            </button>
+
+            <button class="create-btn">
+                Create Free Library
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= BOOKS ================= -->
+
+<h2 class="section-title">Popular Books</h2>
+
+<div class="container">
+
+    <!-- CARD 1 -->
+    <div class="card">
+
+        <img src="https://picsum.photos/300/400?1" alt="Book">
+
+        <div class="book-overlay">
+            A powerful story of courage and survival.
+        </div>
+
+        <div class="card-content">
+
+            <h3>Atomic Habits</h3>
+
+            <div class="buttons">
+                <button class="read">Read More</button>
+                <button class="buy">Buy</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="card">
+
+        <img src="https://picsum.photos/300/400?2" alt="Book">
+
+        <div class="book-overlay">
+            A journey into financial freedom.
+        </div>
+
+        <div class="card-content">
+
+            <h3>Rich Dad Poor Dad</h3>
+
+            <div class="buttons">
+                <button class="read">Read More</button>
+                <button class="buy">Buy</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="card">
+
+        <img src="https://picsum.photos/300/400?3" alt="Book">
+
+        <div class="book-overlay">
+            Master your mindset and success.
+        </div>
+
+        <div class="card-content">
+
+            <h3>The 7 Habits</h3>
+
+            <div class="buttons">
+                <button class="read">Read More</button>
+                <button class="buy">Buy</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CARD 4 -->
+    <div class="card">
+
+        <img src="https://picsum.photos/300/400?4" alt="Book">
+
+        <div class="book-overlay">
+            Improve your thinking power.
+        </div>
+
+        <div class="card-content">
+
+            <h3>Think and Grow Rich</h3>
+
+            <div class="buttons">
+                <button class="read">Read More</button>
+                <button class="buy">Buy</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CARD 5 -->
+    <div class="card">
+
+        <img src="https://picsum.photos/300/400?5" alt="Book">
+
+        <div class="book-overlay">
+            Build unstoppable discipline.
+        </div>
+
+        <div class="card-content">
+
+            <h3>Deep Work</h3>
+
+            <div class="buttons">
+                <button class="read">Read More</button>
+                <button class="buy">Buy</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CARD 6 -->
+    <div class="card">
+
+        <img src="https://picsum.photos/300/400?6" alt="Book">
+
+        <div class="book-overlay">
+            The psychology behind habits.
+        </div>
+
+        <div class="card-content">
+
+            <h3>Power of Habit</h3>
+
+            <div class="buttons">
+                <button class="read">Read More</button>
+                <button class="buy">Buy</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-container">
+
+        <!-- ABOUT -->
+        <div class="footer-box">
+
+            <h3>Online Library</h3>
+
+            <p>
+                Welcome to our online library system where users can
+                read, borrow, and explore books anytime.
+            </p>
+
+        </div>
+
+        <!-- LOCATION -->
+        <div class="footer-box">
+
+            <h3>Location</h3>
+
+            <p>Kigali, Rwanda</p>
+            <p>KN 123 Street</p>
+            <p>Email: onlinelibrarysystem10@gmail.com</p>
+            <p>Phone: 0793934766</p>
+
+        </div>
+
+        <!-- SOCIAL -->
+        <div class="footer-box">
+
+            <h3>Follow Us</h3>
+
+            <div class="social-links">
+
+                <a href="https://www.instagram.com" target="_blank">
+                    Instagram
+                </a>
+
+                <a href="https://www.facebook.com" target="_blank">
+                    Facebook
+                </a>
+
+                <a href="https://x.com" target="_blank">
+                    X (Twitter)
+                </a>
+
+                <a href="https://www.youtube.com" target="_blank">
+                    YouTube
+                </a>
+
+                <a href="https://www.linkedin.com" target="_blank">
+                    LinkedIn
+                </a>
+
+                <a href="https://www.tiktok.com" target="_blank">
+                    TikTok
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- COPYRIGHT -->
+    <div class="footer-bottom">
+        © 2026 Online Library System | All Rights Reserved
+    </div>
+
+</footer>
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+/* LOGOUT FUNCTION */
+function logoutUser(){
+
+    let confirmLogout = confirm(
+        "Are you sure you want to logout?"
+    );
+
+    if(confirmLogout){
+
+        // REMOVE LOGIN STORAGE
+        localStorage.removeItem("savedLogin");
+
+        // SUCCESS MESSAGE
+        alert("✅ Logout successful!");
+
+        // REDIRECT
+        window.location.href = "login.html";
+    }
+}
+
+/* SEARCH FUNCTION */
+document.getElementById("search").addEventListener("keyup", function(){
+
+    let filter =
+    this.value.toLowerCase();
+
+    let cards =
+    document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+
+        let title =
+        card.querySelector("h3").innerText.toLowerCase();
+
+        if(title.includes(filter)){
+            card.style.display = "block";
+        }
+        else{
+            card.style.display = "none";
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>

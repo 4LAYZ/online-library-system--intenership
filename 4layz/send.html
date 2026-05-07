@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ONLINE LIBRARY SYSTEM</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background: #f5f5f5;
+    }
+
+    
+    .navbar {
+        background: linear-gradient(to right, #1e5f86, #2f86c1);
+        padding: 15px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+    }
+
+    .logo {
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .nav-links a {
+        margin: 0 10px;
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .nav-right button {
+        margin-left: 10px;
+        padding: 8px 14px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 13px;
+    }
+
+    .create-btn {
+        background: #4CAF50;
+        color: white;
+    }
+
+    .login-btn {
+        background: transparent;
+        border: 1px solid white;
+        color: white;
+    }
+
+    
+    .hero {
+        height: 500px;
+        background: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f') no-repeat center/cover;
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .overlay {
+        background: rgba(0,0,0,0.6);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .hero-content {
+        position: relative;
+        color: white;
+        padding: 0 60px;
+        max-width: 700px;
+    }
+
+    .hero-content p {
+        font-style: italic;
+        margin-bottom: 10px;
+    }
+
+    .hero-content h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        line-height: 1.3;
+    }
+
+    .hero-buttons button {
+        padding: 12px 18px;
+        margin-right: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .features-btn {
+        background: #2f86c1;
+        color: white;
+    }
+
+    .create-hero-btn {
+        background: #4CAF50;
+        color: white;
+    }
+
+    
+    .info {
+        padding: 30px;
+        text-align: center;
+        font-size: 18px;
+        color: #333;
+    }
+
+    .info strong {
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+
+
+<div class="navbar">
+    <div class="logo">✳ 4layz</div>
+
+    <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="abaut us.html">ABAUT US</a>
+        <a href="register.html">REGISTER</a>
+        <a href="service.html">SERVICE</a>
+        <a href="logout.html">LOGOUT</a>
+       
+    </div>
+
+    <div class="nav-right">
+        <button class="create-btn">Create Library</button>
+        <button><a href="login.html">Login</a></button>
+    </div>
+</div>
+
+
+<section class="hero">
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+        <p>The free online library system - ILS</p>
+        <h1>Open and read your interesting books and novels<br>Be first to attend this website</h1>
+
+        <div class="hero-buttons">
+            <button class="features-btn">View our services</button>
+            <button class="create-hero-btn">read and know</button>
+        </div>
+    </div>
+</section>
+
+<div class="info">
+    Specially designed for <strong>Schools, Colleges, Organizations</strong>, and 
+    <strong>Home</strong> libraries including <strong>Personal</strong> collections 
+    & loved by the <strong>Librarians</strong> across the world.
+</div>
+
+</body>
+</html>

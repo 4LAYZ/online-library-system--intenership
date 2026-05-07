@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BORROW Payment</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#eef2f7;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    background:white;
+    padding:25px;
+    width:350px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.2);
+}
+
+h2{
+    text-align:center;
+}
+
+input, select, button{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+button{
+    background:#007bff;
+    color:white;
+    font-weight:bold;
+    border:none;
+}
+
+button:hover{
+    background:#0056b3;
+}
+
+.hidden{
+    display:none;
+}
+
+.loader{
+    text-align:center;
+    margin-top:15px;
+    display:none;
+}
+
+.ticket{
+    display:none;
+    margin-top:20px;
+    padding:15px;
+    border:2px dashed #333;
+    background:#fafafa;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>Buy Book</h2>
+
+<input type="text" id="name" placeholder="Full Name">
+
+<input type="number" id="amount" placeholder="Amount (RWF)">
+
+<select id="payment" onchange="showFields()">
+    <option value="">Select Payment Method</option>
+    <option value="MTN">MTN MoMo</option>
+    <option value="AIRTEL">Airtel Money</option>
+    <option value="VISA">Visa Card</option>
+</select>
+
+<!-- MTN / Airtel -->
+<div id="mobileField" class="hidden">
+    <input type="text" id="phone" placeholder="Phone Number (07XXXXXXXX)">
+</div>
+
+<!-- VISA -->
+<div id="cardField" class="hidden">
+    <input type="text" placeholder="Card Number (xxxx xxxx xxxx xxxx)">
+    <input type="text" placeholder="Expiry Date (MM/YY)">
+    <input type="text" placeholder="CVV">
+</div>
+
+<button onclick="payNow()">Pay Now</button>
+
+<div class="loader" id="loader">
+    Processing Payment...
+</div>
+
+<div class="ticket" id="ticket">
+    <h3>Payment Receipt</h3>
+    <p id="t_name"></p>
+    <p id="t_amount"></p>
+    <p id="t_method"></p>
+    <p id="t_ref"></p>
+</div>
+
+</div>
+
+<script>
+function showFields(){
+    let method = document.getElementById("payment").value;
+
+    document.getElementById("mobileField").style.display =
+        (method === "MTN" || method === "AIRTEL") ? "block" : "none";
+
+    document.getElementById("cardField").style.display =
+        (method === "VISA") ? "block" : "none";
+}
+
+function payNow(){
+    let name = document.getElementById("name").value;
+    let amount = document.getElementById("amount").value;
+    let method = document.getElementById("payment").value;
+
+    if(name === "" || amount === "" || method === ""){
+        alert("Fill all fields");
+        return;
+    }
+
+    document.getElementById("loader").style.display = "block";
+
+    // simulate real payment delay
+    setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+
+        let ref = "TXN" + Math.floor(Math.random()*1000000);
+
+        document.getElementById("ticket").style.display = "block";
+        document.getElementById("t_name").innerHTML = "Name: " + name;
+        document.getElementById("t_amount").innerHTML = "Amount: " + amount + " RWF";
+        document.getElementById("t_method").innerHTML = "Method: " + method;
+        document.getElementById("t_ref").innerHTML = "Reference: " + ref;
+
+    }, 2500);
+}
+</script>
+
+</body>
+</html>

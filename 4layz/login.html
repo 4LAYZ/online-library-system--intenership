@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial, sans-serif;
+  background: linear-gradient(to right, #dcdde1, #f5f6fa);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  padding:40px 30px;
+  border-radius:12px;
+  width:350px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.1);
+  text-align:center;
+  position:relative;
+}
+
+/* BACK BUTTON */
+.back-btn{
+  position:absolute;
+  top:15px;
+  left:15px;
+  background:#f1f1f1;
+  color:#333;
+  border:none;
+  padding:8px 14px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:14px;
+  transition:0.3s;
+}
+
+.back-btn:hover{
+  background:#ddd;
+}
+
+/* TITLE */
+h2{
+  text-align:left;
+  margin-top:20px;
+  margin-bottom:20px;
+  color:#222;
+}
+
+/* LABEL */
+label{
+  display:block;
+  text-align:left;
+  margin-bottom:8px;
+  font-size:14px;
+  font-weight:bold;
+  color:#444;
+}
+
+/* INPUT */
+input{
+  width:100%;
+  padding:12px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  margin-bottom:15px;
+  outline:none;
+  transition:0.3s;
+}
+
+input:focus{
+  border-color:#0077cc;
+  box-shadow:0 0 5px rgba(0,119,204,0.3);
+}
+
+/* BUTTON */
+button.login-btn{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:6px;
+  background:#2d2d2d;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button.login-btn:hover{
+  background:#1f1f1f;
+}
+
+/* ERROR */
+.error{
+  color:red;
+  font-size:13px;
+  margin-bottom:10px;
+  text-align:left;
+}
+
+/* SUCCESS */
+.success{
+  color:green;
+  font-size:13px;
+  margin-bottom:10px;
+  text-align:left;
+}
+
+/* LINK */
+.link{
+  margin-top:15px;
+  font-size:14px;
+}
+
+.link a{
+  color:#0077cc;
+  text-decoration:none;
+}
+
+.link a:hover{
+  text-decoration:underline;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <!-- BACK BUTTON -->
+  <button class="back-btn" onclick="goBack()">← Back</button>
+
+  <h2>Log in</h2>
+
+  <form id="loginForm">
+
+    <label>Email</label>
+    <input 
+      type="email" 
+      id="email" 
+      placeholder="Enter your email"
+      required
+    >
+
+    <label>Password</label>
+    <input 
+      type="password" 
+      id="password" 
+      placeholder="Enter your password"
+      required
+    >
+
+    <div class="error" id="error"></div>
+    <div class="success" id="success"></div>
+
+    <button type="submit" class="login-btn">Continue</button>
+
+  </form>
+
+  <div class="link">
+    Don't have an account?
+    <a href="register.html">Register</a>
+  </div>
+
+</div>
+
+<script>
+
+// BACK BUTTON
+function goBack(){
+  window.history.back();
+}
+
+// LOGIN VALIDATION
+document.getElementById("loginForm").addEventListener("submit", function(event){
+
+  event.preventDefault();
+
+  let email = document.getElementById("email").value.trim();
+  let password = document.getElementById("password").value.trim();
+
+  let error = document.getElementById("error");
+  let success = document.getElementById("success");
+
+  error.innerText = "";
+  success.innerText = "";
+
+  // CHECK EMPTY FIELDS
+  if(email === "" || password === ""){
+    error.innerText = "❌ Please fill in all fields!";
+    return;
+  }
+
+  // VALID EMAIL
+  let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+  if(!email.match(emailPattern)){
+    error.innerText = "❌ Enter a valid email!";
+    return;
+  }
+
+  // PASSWORD LENGTH
+  if(password.length < 6){
+    error.innerText = "❌ Password must be at least 6 characters!";
+    return;
+  }
+
+  // SUCCESS MESSAGE
+  success.innerText = "✅ Login successful! Redirecting...";
+
+  // REDIRECT AFTER 2 SECONDS
+  setTimeout(() => {
+    window.location.href = "continue.html";
+  }, 2000);
+
+});
+
+</script>
+
+</body>
+</html>
